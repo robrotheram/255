@@ -296,9 +296,8 @@ public class Gui extends javax.swing.JFrame {
                     .add(jSlider1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jTextField10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jButton4))
+                    .add(jTextField10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jButton4)
                     .add(jSlider3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(261, Short.MAX_VALUE))
         );
@@ -525,7 +524,7 @@ public class Gui extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Misc", jPanel5);
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton7.setText("Gaussian Blur");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -827,7 +826,8 @@ public class Gui extends javax.swing.JFrame {
         int y = drawPanel.gets1();
         int x1 = drawPanel.getr2();
         int y1 =drawPanel.gets2();
-        imageLoc.setIcon(new ImageIcon(ic.contrastStretching(x, y, x1, y1, image)));
+        
+        setImage(ic.contrastStretching(x, y, x1, y1, image));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
