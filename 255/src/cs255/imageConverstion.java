@@ -130,7 +130,7 @@ public class imageConverstion {
     public BufferedImage FastGamma(BufferedImage image, int gamma) {
             //Get image dimensions, and declare loop variables
         
-        byte[] lut = new byte[maxRGB];
+        byte[] lut = new byte[maxRGB+1];
         
          for(int i = 0; i < 256; i++ ){
             lut[i] = (byte)((Math.pow((((i)/(maxRGB+0.0))/a),(1.0/(gamma/10.0))))*255);			
