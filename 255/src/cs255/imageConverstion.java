@@ -272,4 +272,92 @@ public class imageConverstion {
    
    
    
+       public BufferedImage cross (BufferedImage image, int[][] matrix) {
+    
+          int t =0;
+          int f =0;
+        
+          byte[] data = GetImageData(image);
+          int[] map = new int[data.length];
+          int w=image.getWidth(), h=image.getHeight(), i, j, c;
+          for (j=0; j<h; j++) {
+              for (i=0; i<w; i++) {
+                  for (c=0; c<3; c++) {
+                            // data[c+3*i+3*j*w]=(byte) (gammaLUT[(data[c+3*i+3*j*w]&255)]);  <- reference
+                            if((j-(matrix.length/2)>0)&&(j+(matrix.length/2)<h)&&((i-(matrix[0].length/2)>0)&&(i+(matrix[0].length/2)<w))){
+                               int sum = 0;
+                               
+                               int newHPos = j-(matrix.length/2);
+                               int newWPos = i-(matrix[0].length/2);
+                                for (int k = 0; k<matrix.length; k++) {
+                                    newWPos = i-(matrix[0].length/2);
+                                    for (int l = 0; l<matrix.length; l++) {
+                                        sum +=matrix[k][l]*(data[c+3*newWPos+3*newHPos*w]&255);
+                                        newWPos++;
+                                                                            
+                                       
+                                    }
+                                    newHPos++ ;       
+                                }
+                                if((((c+3.0*newWPos+3.0*newHPos*w)/data.length)*100)>98){
+                                 //System.out.println("error! whp = "+newHPos+" wwp = "+newWPos+" percent = "+((((c+3.0*newWPos+3.0*newHPos*w)/data.length)*100)));   
+                                }
+                                map[c+3*i+3*j*w]=sum;                                
+                                
+                                
+                            }else  {
+                                data[c+3*i+3*j*w]=(byte) (0&255);
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                  }
+            }
+        }
+        System.out.println("true = "+t+" f = "+f+"ratio = "+(((f+0.0)/t)*100)+"%");
+        int[] rgbMax = new int[3];
+        int[] rgbMin = new int[3];
+        
+        
+        for (j=0; j<h; j++) {
+                      for (i=0; i<w; i++) {
+                          for (c=0; c<3; c++) {
+                                    int test = map[c+3*i+3*j*w];
+                                    if(test < rgbMin[c]){
+                                        rgbMin[c] = test;
+                                    }else if(test > rgbMax[c]){
+                                        rgbMax[c] = test;
+                                    }                       
+                    }
+                    
+        }
+                    
+        }
+        System.out.println(" Max = R: "+rgbMax[0]+" G: "+rgbMax[1]+" B:"+rgbMax[2]);
+        System.out.println(" Min = R: "+rgbMin[0]+" G: "+rgbMin[1]+" B:"+rgbMin[2]);
+        
+        for (j=0; j<h; j++) {
+                              for (i=0; i<w; i++) {
+                                  for (c=0; c<3; c++) {
+                                       int am = map[c+3*i+3*j*w];
+                                       data[c+3*i+3*j*w]=(byte) ( ((am-rgbMin[c])*225)/(rgbMax[c]-rgbMin[c])  );               
+                            }
+                       }     
+                }
+        
+        
+        
+        
+        
+        
+        return image;
+        
+        
+    }
+   
+   
 }
