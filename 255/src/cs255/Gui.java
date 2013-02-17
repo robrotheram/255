@@ -1040,6 +1040,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         image_file = getFile();
+        System.out.println("file size = "+image_file.length());
         BufferedImage newI = null;
         try {
             // Open the file and read it into a BufferedImage
@@ -1217,6 +1218,7 @@ public class Gui extends javax.swing.JFrame {
     
     public void setImage(BufferedImage im){
         image = im;
+        
         imageLoc.setIcon(new ImageIcon(image)); 
         imageLoc.setIcon(new ImageIcon(im.getScaledInstance(imageLoc.getWidth(), imageLoc.getHeight(), Image.SCALE_SMOOTH)));
         sethistogram();

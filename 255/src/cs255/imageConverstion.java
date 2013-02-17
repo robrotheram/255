@@ -131,7 +131,7 @@ public class imageConverstion {
             //Get image dimensions, and declare loop variables
         
         byte[] lut = new byte[maxRGB+1];
-        
+        System.out.println("image size = "+lut.length);
          for(int i = 0; i < 256; i++ ){
             lut[i] = (byte)((Math.pow((((i)/(maxRGB+0.0))/a),(1.0/(gamma/10.0))))*255);			
 	}
