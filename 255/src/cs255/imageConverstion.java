@@ -222,20 +222,22 @@ public class imageConverstion {
     
 
    public ChartPanel createHistogram(BufferedImage image,int channel, Boolean all, String title,XYBarRenderer br){
-     
+        int w=image.getWidth(), h=image.getHeight(), i, j;
         byte[] data = GetImageData(image);
         int[] hist = new int[256];
         int pixelCount = data.length;
         
         if(!all){
             
-            for( int i = 0; i < pixelCount; i = i + 3 ){
-                hist[data[i+channel]&255]++;
-                
-                
-            }
+            for (j=0; j<h; j++) {
+                    for (i=0; i<w; i++) {
+                            
+                                     hist[(data[channel+3*i+3*j*w]&maxRGB)]++;
+                            
+                    }
+            } 
         }else{
-            for( int i = 0; i < pixelCount; i++ ){
+            for( i = 0; i < pixelCount; i++ ){
                 hist[data[i]&255]++;
             }   
         }
@@ -243,7 +245,7 @@ public class imageConverstion {
         
         XYSeries dataset = new XYSeries("Histogram");
         
-        for(int i = 0; i<hist.length; i++){
+        for( i = 0; i<hist.length; i++){
               dataset.add(i,hist[i]);
         }
         
