@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cs255;
 
 import java.awt.image.BufferedImage;
@@ -30,16 +26,18 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 /**
- *
+ * This class has different methods to manipulate the image in different ways
  * @author Robert
  */
 public class imageConverstion {
-    
-    BufferedImage image;
-	public static final int maxRGB = 255;
-	public static final double a =1.0;
+        private final int MAXRGB = 255;
+	private final double A =1.0;
 	 
-   
+   /**
+    * Method to convert a BufferedImage to a Byte[]
+    * @param BufferedImage - image to covert
+    * @return byte[] - byte array of the converted image
+    */
     public static byte[] GetImageData(BufferedImage image) {
             WritableRaster WR=image.getRaster();
             DataBuffer DB=WR.getDataBuffer();
@@ -49,9 +47,14 @@ public class imageConverstion {
             return ((DataBufferByte) DB).getData();
     }
 
-
+/**
+ * Method that takes a buffered image and equalise it. 
+ * @param BufferedImage image to equalise
+ * @return BufferedImahe Equalise image
+ */
     public BufferedImage Equalise(BufferedImage image) {
-        
+    
+    //Setup arrays and varibles    
     byte[] data = GetImageData(image); 
     int pixelCount = data.length;
     int[] hist = new int[256];
@@ -59,21 +62,25 @@ public class imageConverstion {
     int [] outImage = new int[data.length];
     int sum =0;
     int i;
+    
+    //Calculate histogram on all values
     for ( i = 0; i < pixelCount; ++i )
     {
         hist[data[i]&255]++;
         
     }  
+    
+    //Calculate the cumative Distrubution and caluclate the new lookup table
      for ( i=0; i < hist.length; ++i ){
             sum += hist[i];
             lut[i] = sum * 255 / pixelCount;
            
         }
 
-        // transform image using sum histogram as a LUT
+        // transform image using LUT
         for ( i = 0; i < pixelCount; ++i ){
             data[i] = (byte)lut[data[i]&255];
-             System.out.println(data[i]);
+            
         }
         return image;
     
@@ -99,7 +106,7 @@ public class imageConverstion {
 		   for (j=0; j<h; j++) {
                     for (i=0; i<w; i++) {
                             for (c=0; c<3; c++) {
-                                    data[c+3*i+3*j*w]=(byte) (maxRGB-(data[c+3*i+3*j*w]&maxRGB));
+                                    data[c+3*i+3*j*w]=(byte) (MAXRGB-(data[c+3*i+3*j*w]&MAXRGB));
                             } // colour loop
                     } // column loop
             } // row loop
@@ -107,7 +114,7 @@ public class imageConverstion {
 			*/
 			
 			for(i=0; i < data.length; i++){
-				data[i]=(byte) (maxRGB-(data[i]&maxRGB));
+				data[i]=(byte) (MAXRGB-(data[i]&MAXRGB));
 			}
 			return image;
     }
@@ -118,7 +125,7 @@ public class imageConverstion {
 			byte[] data = GetImageData(image);
 			
 			for(i=0; i < data.length; i++){
-				data[i]=(byte) ((Math.pow((((data[i]&maxRGB)/(maxRGB+0.0))/a),(1.0/(gamma/10.0))))*255);
+				data[i]=(byte) ((Math.pow((((data[i]&MAXRGB)/(MAXRGB+0.0))/A),(1.0/(gamma/10.0))))*255);
 				
 			}
             return image;
@@ -129,15 +136,15 @@ public class imageConverstion {
     public BufferedImage FastGamma(BufferedImage image, int gamma) {
             //Get image dimensions, and declare loop variables
         
-        byte[] lut = new byte[maxRGB+1];
+        byte[] lut = new byte[MAXRGB+1];
         System.out.println("image size = "+lut.length);
          for(int i = 0; i < 256; i++ ){
-            lut[i] = (byte)((Math.pow((((i)/(maxRGB+0.0))/a),(1.0/(gamma/10.0))))*255);			
+            lut[i] = (byte)((Math.pow((((i)/(MAXRGB+0.0))/A),(1.0/(gamma/10.0))))*255);			
 	}
             int w=image.getWidth(), h=image.getHeight(), i, j, c;
 			byte[] data = GetImageData(image);
 			for(i= data.length -1; i !=0; i--){
-				data[i]= lut[(data[i]&maxRGB)];
+				data[i]= lut[(data[i]&MAXRGB)];
 			}
             return image;
     }
@@ -157,7 +164,7 @@ public class imageConverstion {
             for (j=0; j<h; j++) {
                     for (i=0; i<w; i++) {
                             for (c=0; c<3; c++) {
-                                    int_image[j][i][c]=data[c+3*i+3*j*w]&maxRGB;
+                                    int_image[j][i][c]=data[c+3*i+3*j*w]&MAXRGB;
                             } // colour loop
                     } // column loop
             } // row loop
@@ -165,7 +172,7 @@ public class imageConverstion {
             // Now carry out processing on this different data typed image (e.g. correlation or "bluefade"
             for (j=0; j<h; j++) {
                     for (i=0; i<w; i++) {
-                                int_image[j][i][0]=maxRGB*j/h; //BLUE
+                                int_image[j][i][0]=MAXRGB*j/h; //BLUE
                                 int_image[j][i][1]=0; //GREEN
                                 int_image[j][i][2]=0; //RED
                     } // column loop
@@ -187,12 +194,12 @@ public class imageConverstion {
     public BufferedImage contrastStretching(int x , int y, int x1, int y1, BufferedImage image){
         final double lowgr = (y-0.0)/(x-0.0);
         final double midgr = (y1-y+0.0)/(x1-x+0.0);
-        final double topgr = (maxRGB -y1+0.0)/(maxRGB-x1+0.0);
+        final double topgr = (MAXRGB -y1+0.0)/(MAXRGB-x1+0.0);
         byte[] newGammaTable = new byte[256];
         
         System.out.println("low gr = "+lowgr+" mid gr "+midgr+" top gr ="+topgr);
         
-        for(int i =0; i<=maxRGB;i++){
+        for(int i =0; i<=MAXRGB;i++){
             if(i<x){
                 newGammaTable[i] = (byte)(i*lowgr);
             }else if((i>=x)&&(i<x1)){
@@ -208,7 +215,7 @@ public class imageConverstion {
         
         byte[] data = GetImageData(image);
 	for(int i= data.length -1; i !=0; i--){
-            data[i]= newGammaTable[(data[i]&maxRGB)];
+            data[i]= newGammaTable[(data[i]&MAXRGB)];
 	}
         
         return image;
@@ -231,7 +238,7 @@ public class imageConverstion {
             for (j=0; j<h; j++) {
                     for (i=0; i<w; i++) {
                             
-                                     hist[(data[channel+3*i+3*j*w]&maxRGB)]++;
+                                     hist[(data[channel+3*i+3*j*w]&MAXRGB)]++;
                             
                     }
             } 
