@@ -63,18 +63,17 @@ public class imageConverstion {
     {
         hist[data[i]&255]++;
         
-    }
-    
-
-    
+    }  
      for ( i=0; i < hist.length; ++i ){
             sum += hist[i];
             lut[i] = sum * 255 / pixelCount;
+           
         }
 
         // transform image using sum histogram as a LUT
         for ( i = 0; i < pixelCount; ++i ){
             data[i] = (byte)lut[data[i]&255];
+             System.out.println(data[i]);
         }
         return image;
     
@@ -237,8 +236,10 @@ public class imageConverstion {
                     }
             } 
         }else{
-            for( i = 0; i < pixelCount; i++ ){
-                hist[data[i]&255]++;
+            for( i = 0; i < pixelCount; i = i +3 ){
+                double sum = (data[i]&255+data[i+1]&255+data[i+2]&255)/3;
+                
+                hist[(int)Math.round(sum)]++;
             }   
         }
         
@@ -281,6 +282,7 @@ public class imageConverstion {
         
           byte[] data = GetImageData(image);
           int[] map = new int[data.length];
+          
           int w=image.getWidth(), h=image.getHeight(), i, j, c;
           for (j=0; j<h; j++) {
               for (i=0; i<w; i++) {

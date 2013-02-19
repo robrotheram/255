@@ -178,11 +178,11 @@ public class Gui extends javax.swing.JFrame {
         RedChart.setLayout(RedChartLayout);
         RedChartLayout.setHorizontalGroup(
             RedChartLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 428, Short.MAX_VALUE)
+            .add(0, 444, Short.MAX_VALUE)
         );
         RedChartLayout.setVerticalGroup(
             RedChartLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 253, Short.MAX_VALUE)
+            .add(0, 271, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Red", RedChart);
@@ -191,11 +191,11 @@ public class Gui extends javax.swing.JFrame {
         GreenChart.setLayout(GreenChartLayout);
         GreenChartLayout.setHorizontalGroup(
             GreenChartLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 428, Short.MAX_VALUE)
+            .add(0, 444, Short.MAX_VALUE)
         );
         GreenChartLayout.setVerticalGroup(
             GreenChartLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 253, Short.MAX_VALUE)
+            .add(0, 271, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Green", GreenChart);
@@ -204,11 +204,11 @@ public class Gui extends javax.swing.JFrame {
         BlueChart.setLayout(BlueChartLayout);
         BlueChartLayout.setHorizontalGroup(
             BlueChartLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 428, Short.MAX_VALUE)
+            .add(0, 444, Short.MAX_VALUE)
         );
         BlueChartLayout.setVerticalGroup(
             BlueChartLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 253, Short.MAX_VALUE)
+            .add(0, 271, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Blue", BlueChart);
@@ -217,11 +217,11 @@ public class Gui extends javax.swing.JFrame {
         allChart.setLayout(allChartLayout);
         allChartLayout.setHorizontalGroup(
             allChartLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 428, Short.MAX_VALUE)
+            .add(0, 444, Short.MAX_VALUE)
         );
         allChartLayout.setVerticalGroup(
             allChartLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 253, Short.MAX_VALUE)
+            .add(0, 271, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Brightness", allChart);
@@ -281,7 +281,7 @@ public class Gui extends javax.swing.JFrame {
                                 .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 53, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(jButton1)))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -296,11 +296,10 @@ public class Gui extends javax.swing.JFrame {
                     .add(jSlider1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jTextField10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jButton4))
+                    .add(jTextField10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jButton4)
                     .add(jSlider3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Gamma", jPanel4);
@@ -389,7 +388,7 @@ public class Gui extends javax.swing.JFrame {
                     .add(jTextField3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 43, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jTextField4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 43, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jTextField5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 43, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -418,7 +417,7 @@ public class Gui extends javax.swing.JFrame {
                     .add(jTextField5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton2)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Contrast", jPanel3);
@@ -478,7 +477,7 @@ public class Gui extends javax.swing.JFrame {
                     .add(drawLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(jTextField6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(jButton3)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Contrast Advance", draw);
@@ -508,7 +507,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jButton5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+            .add(jButton5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
             .add(jButton6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton11, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -520,12 +519,12 @@ public class Gui extends javax.swing.JFrame {
                 .add(jButton6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 57, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 192, Short.MAX_VALUE))
+                .add(0, 210, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Misc", jPanel5);
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton7.setText("Gaussian Blur");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -739,7 +738,7 @@ public class Gui extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
             .add(jPanel6Layout.createSequentialGroup()
                 .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel6Layout.createSequentialGroup()
@@ -754,7 +753,7 @@ public class Gui extends javax.swing.JFrame {
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 276, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 45, Short.MAX_VALUE)
                 .add(jButton10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -827,7 +826,7 @@ public class Gui extends javax.swing.JFrame {
         int y = drawPanel.gets1();
         int x1 = drawPanel.getr2();
         int y1 =drawPanel.gets2();
-        imageLoc.setIcon(new ImageIcon(ic.contrastStretching(x, y, x1, y1, image)));
+        setImage((ic.contrastStretching(x, y, x1, y1, image)));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
@@ -1354,8 +1353,11 @@ class mouse implements MouseListener, MouseMotionListener{
         }
     
 }
-}    
-   
+}  
+
+
+
+
     
     
     
