@@ -874,7 +874,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        setImage(ic.Equalise(image));          
+        setImage(ic.equalized(image));          
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

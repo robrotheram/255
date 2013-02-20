@@ -86,7 +86,45 @@ public class imageConverstion {
     
             
     }
-
+public BufferedImage equalized(BufferedImage image){
+    int w=image.getWidth(), h=image.getHeight(), i, j, c;	
+    byte[] data = GetImageData(image);
+    int[] brHist= new int[256];
+    int[] t = new int[256];
+    int[] map = new int[256];
+    int count = 0;
+    for (j=0; j<h; j++) {
+                    for (i=0; i<w; i++) {
+                            int sum =0;
+                            for (c=0; c<3; c++) {
+                                    sum =+ data[c+3*i+3*j*w]&MAXRGB;
+                            } 
+                            brHist[(int)Math.round(sum/3)]++;
+                            
+                    } 
+            } 
+    t[0] = brHist[0];
+    
+    for(i = 1; i< 256; i++){
+        t[i]= t[i-1]+brHist[i];
+        map[i]=Math.max(0,Math.round((255*t[i])/(h*w))-1);
+    }
+    
+    for (j=0; j<h; j++) {
+                    for (i=0; i<w; i++) {
+                            for (c=0; c<3; c++) {
+                                    data[c+3*i+3*j*w]=(byte) map[(data[c+3*i+3*j*w]&MAXRGB)];
+                            } // colour loop
+                    } 
+            }
+    
+   return image; 
+    
+}
+    
+    
+    
+    
     /*
         This function shows how to carry out an operation on an image.
         It obtains the dimensions of the image, and then loops through
