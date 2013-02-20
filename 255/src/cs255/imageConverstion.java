@@ -1,5 +1,6 @@
 package cs255;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.awt.image.DataBufferByte;
@@ -52,40 +53,6 @@ public class imageConverstion {
  * @param BufferedImage image to equalise
  * @return BufferedImahe Equalise image
  */
-    public BufferedImage Equalise(BufferedImage image) {
-    
-    //Setup arrays and varibles    
-    byte[] data = GetImageData(image); 
-    int pixelCount = data.length;
-    int[] hist = new int[256];
-    int[] lut = new int[256];
-    int [] outImage = new int[data.length];
-    int sum =0;
-    int i;
-    
-    //Calculate histogram on all values
-    for ( i = 0; i < pixelCount; ++i )
-    {
-        hist[data[i]&255]++;
-        
-    }  
-    
-    //Calculate the cumative Distrubution and caluclate the new lookup table
-     for ( i=0; i < hist.length; ++i ){
-            sum += hist[i];
-            lut[i] = sum * 255 / pixelCount;
-           
-        }
-
-        // transform image using LUT
-        for ( i = 0; i < pixelCount; ++i ){
-            data[i] = (byte)lut[data[i]&255];
-            
-        }
-        return image;
-    
-            
-    }
 public BufferedImage equalized(BufferedImage image){
     int w=image.getWidth(), h=image.getHeight(), i, j, c;	
     byte[] data = GetImageData(image);
@@ -93,13 +60,16 @@ public BufferedImage equalized(BufferedImage image){
     int[] t = new int[256];
     int[] map = new int[256];
     int count = 0;
+    
+    
     for (j=0; j<h; j++) {
                     for (i=0; i<w; i++) {
                             int sum =0;
-                            for (c=0; c<3; c++) {
-                                    sum =+ data[c+3*i+3*j*w]&MAXRGB;
-                            } 
-                            brHist[(int)Math.round(sum/3)]++;
+                            
+                            sum = (data[0+3*i+3*j*w]&MAXRGB)+(data[1+3*i+3*j*w]&MAXRGB)+(data[2+3*i+3*j*w]&MAXRGB);
+        
+                            brHist[(int)Math.round(sum/3.0)]++;
+                            //System.out.println(sum);
                             
                     } 
             } 
@@ -107,7 +77,7 @@ public BufferedImage equalized(BufferedImage image){
     
     for(i = 1; i< 256; i++){
         t[i]= t[i-1]+brHist[i];
-        map[i]=Math.max(0,Math.round((255*t[i])/(h*w))-1);
+        map[i]=Math.max(0,(int)Math.round((255.0*t[i])/(h*w))-1);
     }
     
     for (j=0; j<h; j++) {
@@ -120,6 +90,88 @@ public BufferedImage equalized(BufferedImage image){
     
    return image; 
     
+}
+
+public BufferedImage colorEqualized(BufferedImage image){
+    int w=image.getWidth(), h=image.getHeight(), i, j, c;	
+    byte[] data = GetImageData(image);
+    System.out.println("data lengths =" +data.length);
+    
+    double[] hmap = new double[data.length];
+    int [] vHist= new int[256];
+    int[] t = new int[256];
+    int[] map = new int[256];
+    int count = 0;
+    
+  
+    //Color cl = new Color(Color.HSBtoRGB(hsv[0], hsv[1], hsv[2]));
+   // int red = cl.getRed();
+    
+    
+    
+    for (j=0; j<h; j++) {
+                    for (i=0; i<w; i++) {
+                            int sum =0;
+                            float[] hsv = new float[3];
+                            Color.RGBtoHSB((data[0+3*i+3*j*w]&MAXRGB),(data[1+3*i+3*j*w]&MAXRGB),(data[2+3*i+3*j*w]&MAXRGB),hsv);
+                            vHist[(int)Math.round((hsv[2]*255))]++;
+                            //System.out.println(hsv[2]*255);
+                           
+                            
+                    } 
+            } 
+   t[0] = vHist[0];
+    
+    for(i = 1; i< 256; i++){
+        t[i]= t[i-1]+vHist[i];
+        map[i]=Math.max(0,(int)Math.round((255.0*t[i])/(h*w))-1);
+    }
+    
+ for (j=0; j<h; j++) {
+                    for (i=0; i<w; i++) {
+                        int r = (data[0+3*i+3*j*w]&MAXRGB);
+                        int g = (data[1+3*i+3*j*w]&MAXRGB);
+                        int b = (data[2+3*i+3*j*w]&MAXRGB);
+                        
+                        
+                        
+                            for (c=0; c<3; c++) {
+                                    
+                                    data[c+3*i+3*j*w]= (byte)getColor(r,g,b,(data[c+3*i+3*j*w]&MAXRGB),c,map);
+                            
+                            } // colour loop
+                    } 
+            }
+    
+          
+    
+    
+    
+    
+    for(i =0; i<vHist.length; i++){
+        System.out.println(vHist[i]);
+    }
+   return image; 
+    
+}
+public int getColor(int r , int g, int b,int p, int c, int[] map ){
+    float[] hsv = new float[3];
+    Color.RGBtoHSB(r,g,b,hsv);
+    Color cl = new Color(Color.HSBtoRGB(hsv[0], hsv[1],(float)((map[p])/255.0) ));
+   int out = 0;
+    switch(c){
+        case 0: out = cl.getRed();
+            break;
+        case 1: out = cl.getGreen();
+            break;
+        case 2: out = cl.getBlue();
+            break;
+            
+    }
+    //System.out.println("out = "+ out);
+    
+    
+  return out;
 }
     
     
