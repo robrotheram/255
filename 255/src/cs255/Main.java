@@ -14,7 +14,13 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Gui g = new Gui();
-       g.setVisible(true);
+        int i = 0;
+        if(i == 0){
+            smalluiGui g = new smalluiGui();
+             g.setVisible(true);
+        }else{
+            Gui g = new Gui();
+            g.setVisible(true);
+        }
     }
 }
