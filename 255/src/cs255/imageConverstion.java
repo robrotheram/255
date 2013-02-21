@@ -333,10 +333,16 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
                     }
             } 
         }else{
-            for( i = 0; i < pixelCount; i = i +3 ){
-                double sum = (data[i]&255+data[i+1]&255+data[i+2]&255)/3;
+             for (j=0; j<h; j++) {
+              for (i=0; i<w; i++) {
+                  double sum = 0;
+                         sum = sum + (data[0+3*i+3*j*w]&255);
+                         sum = sum + (data[1+3*i+3*j*w]&255);
+                         sum = sum + (data[2+3*i+3*j*w]&255);
                 
-                hist[(int)Math.round(sum)]++;
+                       hist[(int)Math.round(sum/3.0)]++;
+               
+              } 
             }   
         }
         
@@ -420,32 +426,30 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
             }
         }
         System.out.println("true = "+t+" f = "+f+"ratio = "+(((f+0.0)/t)*100)+"%");
-        int[] rgbMax = new int[3];
-        int[] rgbMin = new int[3];
+        int rgbMax = 0;
+        int rgbMin = 0;
         
         
         for (j=0; j<h; j++) {
                       for (i=0; i<w; i++) {
                           for (c=0; c<3; c++) {
                                     int test = map[c+3*i+3*j*w];
-                                    if(test < rgbMin[c]){
-                                        rgbMin[c] = test;
-                                    }else if(test > rgbMax[c]){
-                                        rgbMax[c] = test;
+                                    if(test < rgbMin){
+                                        rgbMin = test;
+                                    }else if(test > rgbMax){
+                                        rgbMax = test;
                                     }                       
                     }
                     
         }
                     
         }
-        System.out.println(" Max = R: "+rgbMax[0]+" G: "+rgbMax[1]+" B:"+rgbMax[2]);
-        System.out.println(" Min = R: "+rgbMin[0]+" G: "+rgbMin[1]+" B:"+rgbMin[2]);
-        
+
         for (j=0; j<h; j++) {
                               for (i=0; i<w; i++) {
                                   for (c=0; c<3; c++) {
                                        int am = map[c+3*i+3*j*w];
-                                       data[c+3*i+3*j*w]=(byte) ( ((am-rgbMin[c])*225)/(rgbMax[c]-rgbMin[c])  );               
+                                       data[c+3*i+3*j*w]=(byte) ( ((am-rgbMin)*225)/(rgbMax-rgbMin)  );               
                             }
                        }     
                 }
