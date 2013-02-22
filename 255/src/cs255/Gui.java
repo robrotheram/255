@@ -42,6 +42,7 @@ public class Gui extends javax.swing.JFrame {
     private testD drawPanel;
     private int mouseClick = 0;
     private File image_file;
+    private Boolean isEqu;
     
     private imageConverstion ic;
 
@@ -57,7 +58,7 @@ public class Gui extends javax.swing.JFrame {
     public Gui() {
       
             
-       
+        isEqu = false;
         initComponents();
         
         
@@ -775,9 +776,8 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(jButton10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jPanel6Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                        .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 344, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 344, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jPanel7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -820,17 +820,17 @@ public class Gui extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel8Layout.createSequentialGroup()
-                .add(36, 36, 36)
-                .add(imageLoc, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 775, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(imageLoc, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel8Layout.createSequentialGroup()
-                .add(46, 46, 46)
-                .add(imageLoc, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 552, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(imageLoc, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jMenu1.setText("File");
@@ -935,39 +935,14 @@ public class Gui extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
        
-        int[][]matrix = new int[5][5];
-        
-        matrix[0][0] = Integer.parseInt(jTextField12.getText());
-        matrix[0][1] = Integer.parseInt(jTextField16.getText());
-        matrix[0][2] = Integer.parseInt(jTextField21.getText());
-        matrix[0][3] = Integer.parseInt(jTextField26.getText());
-        matrix[0][4] = Integer.parseInt(jTextField31.getText());
-        
-        matrix[1][0] = Integer.parseInt(jTextField11.getText());
-        matrix[1][1] = Integer.parseInt(jTextField20.getText());
-        matrix[1][2] = Integer.parseInt(jTextField25.getText());
-        matrix[1][3] = Integer.parseInt(jTextField30.getText());
-        matrix[1][4] = Integer.parseInt(jTextField35.getText());
-
-        matrix[2][0] = Integer.parseInt(jTextField13.getText());
-        matrix[2][1] = Integer.parseInt(jTextField19.getText());
-        matrix[2][2] = Integer.parseInt(jTextField24.getText());
-        matrix[2][3] = Integer.parseInt(jTextField29.getText());
-        matrix[2][4] = Integer.parseInt(jTextField34.getText());
-        
-        matrix[3][0] = Integer.parseInt(jTextField14.getText());
-        matrix[3][1] = Integer.parseInt(jTextField18.getText());
-        matrix[3][2] = Integer.parseInt(jTextField23.getText());
-        matrix[3][3] = Integer.parseInt(jTextField28.getText());
-        matrix[3][4] = Integer.parseInt(jTextField33.getText());
-        
-        matrix[4][0] = Integer.parseInt(jTextField15.getText());
-        matrix[4][1] = Integer.parseInt(jTextField17.getText());
-        matrix[4][2] = Integer.parseInt(jTextField22.getText());
-        matrix[4][3] = Integer.parseInt(jTextField27.getText());
-        matrix[4][4] = Integer.parseInt(jTextField32.getText());
-        
-       setImage(ic.cross(image, matrix));
+        if(isEqu){
+             setImage(ic.contrastStretching(125,0,125,255,ic.cross(ic.grayOut(image), makeMatrix())));
+             isEqu = false;
+        }else{
+             
+            setImage(ic.cross(image, makeMatrix()));
+        }
+       
           
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -985,7 +960,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        
+        isEqu = false;
         
         jTextField12.setText("1");
         jTextField16.setText("1");
@@ -1021,7 +996,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-               
+        isEqu = false;
         jTextField12.setText("-1");
         jTextField16.setText("-1");
         jTextField21.setText("-1");
@@ -1085,6 +1060,9 @@ public class Gui extends javax.swing.JFrame {
         jTextField22.setText("-1");
         jTextField27.setText("-1");
         jTextField32.setText("-1");
+        
+        isEqu = true;
+        
         
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -1236,9 +1214,9 @@ public class Gui extends javax.swing.JFrame {
         BlueChart.setLayout(new BorderLayout());
         allChart.setLayout(new BorderLayout());
 
-        RedChart.add(ic.createHistogram(image, 0, false, "Red Channel",new redRender()),BorderLayout.CENTER);
-        BlueChart.add(ic.createHistogram(image, 1, false, "Blue Channel", new BlueRender()),BorderLayout.CENTER);
-        GreenChart.add(ic.createHistogram(image, 2, false, "Green Channel", new GreenRender()),BorderLayout.CENTER);
+        RedChart.add(ic.createHistogram(image, 2, false, "Red Channel",new redRender()),BorderLayout.CENTER);
+        BlueChart.add(ic.createHistogram(image, 0, false, "Blue Channel", new BlueRender()),BorderLayout.CENTER);
+        GreenChart.add(ic.createHistogram(image, 1, false, "Green Channel", new GreenRender()),BorderLayout.CENTER);
         allChart.add(ic.createHistogram(image, 0, true, "All Channel",new All()),BorderLayout.CENTER);
       
         RedChart.validate();
@@ -1268,7 +1246,42 @@ public class Gui extends javax.swing.JFrame {
         return f;
     }
 
-    
+    public int[][] makeMatrix(){
+        int[][]matrix = new int[5][5];
+        
+        matrix[0][0] = Integer.parseInt(jTextField12.getText());
+        matrix[0][1] = Integer.parseInt(jTextField16.getText());
+        matrix[0][2] = Integer.parseInt(jTextField21.getText());
+        matrix[0][3] = Integer.parseInt(jTextField26.getText());
+        matrix[0][4] = Integer.parseInt(jTextField31.getText());
+        
+        matrix[1][0] = Integer.parseInt(jTextField11.getText());
+        matrix[1][1] = Integer.parseInt(jTextField20.getText());
+        matrix[1][2] = Integer.parseInt(jTextField25.getText());
+        matrix[1][3] = Integer.parseInt(jTextField30.getText());
+        matrix[1][4] = Integer.parseInt(jTextField35.getText());
+
+        matrix[2][0] = Integer.parseInt(jTextField13.getText());
+        matrix[2][1] = Integer.parseInt(jTextField19.getText());
+        matrix[2][2] = Integer.parseInt(jTextField24.getText());
+        matrix[2][3] = Integer.parseInt(jTextField29.getText());
+        matrix[2][4] = Integer.parseInt(jTextField34.getText());
+        
+        matrix[3][0] = Integer.parseInt(jTextField14.getText());
+        matrix[3][1] = Integer.parseInt(jTextField18.getText());
+        matrix[3][2] = Integer.parseInt(jTextField23.getText());
+        matrix[3][3] = Integer.parseInt(jTextField28.getText());
+        matrix[3][4] = Integer.parseInt(jTextField33.getText());
+        
+        matrix[4][0] = Integer.parseInt(jTextField15.getText());
+        matrix[4][1] = Integer.parseInt(jTextField17.getText());
+        matrix[4][2] = Integer.parseInt(jTextField22.getText());
+        matrix[4][3] = Integer.parseInt(jTextField27.getText());
+        matrix[4][4] = Integer.parseInt(jTextField32.getText());
+        
+        return matrix;
+        
+    }
     
     
     

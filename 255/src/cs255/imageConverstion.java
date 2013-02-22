@@ -1,7 +1,9 @@
 package cs255;
 
 import java.awt.Color;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
 import java.awt.image.DataBuffer;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
@@ -183,25 +185,8 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
         the image carrying out the invert.
     */
     public BufferedImage Invert(BufferedImage image) {
-            //Get image dimensions, and declare loop variables
             int w=image.getWidth(), h=image.getHeight(), i, j, c;
-            //Obtain pointer to data for fast processing
             byte[] data = GetImageData(image);
-            
-            //Shows how to loop through each pixel and colour
-            //Try to always use j for loops in y, and i for loops in x
-            //as this makes the code more readable
-           /* 
-		   Loop below nice and clever but unessary and overly complex
-		   for (j=0; j<h; j++) {
-                    for (i=0; i<w; i++) {
-                            for (c=0; c<3; c++) {
-                                    data[c+3*i+3*j*w]=(byte) (MAXRGB-(data[c+3*i+3*j*w]&MAXRGB));
-                            } // colour loop
-                    } // column loop
-            } // row loop
-            
-			*/
 			
 			for(i=0; i < data.length; i++){
 				data[i]=(byte) (MAXRGB-(data[i]&MAXRGB));
@@ -238,49 +223,7 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
 			}
             return image;
     }
-   
-    
-    public BufferedImage BlueFade(BufferedImage image) {
-            //Get image dimensions, and declare loop variables
-            int w=image.getWidth(), h=image.getHeight(), i, j, c;
-            //Obtain pointer to data for fast processing
-            byte[] data = GetImageData(image);
-            int int_image[][][];
-            double t;
-            
-            int_image = new int[h][w][3];
-            
-            // Copy byte data to new image taking care to treat bytes as unsigned
-            for (j=0; j<h; j++) {
-                    for (i=0; i<w; i++) {
-                            for (c=0; c<3; c++) {
-                                    int_image[j][i][c]=data[c+3*i+3*j*w]&MAXRGB;
-                            } // colour loop
-                    } // column loop
-            } // row loop
-            
-            // Now carry out processing on this different data typed image (e.g. correlation or "bluefade"
-            for (j=0; j<h; j++) {
-                    for (i=0; i<w; i++) {
-                                int_image[j][i][0]=MAXRGB*j/h; //BLUE
-                                int_image[j][i][1]=0; //GREEN
-                                int_image[j][i][2]=0; //RED
-                    } // column loop
-            } // row loop
-            
-            // Now copy the processed image back to the original
-            for (j=0; j<h; j++) {
-                    for (i=0; i<w; i++) {
-                            for (c=0; c<3; c++) {
-                                    data[c+3*i+3*j*w]=(byte) int_image[j][i][c];
-                            } // colour loop
-                    } // column loop
-            } // row loop
-            
 
-            return image;
-    }
-    
     public BufferedImage contrastStretching(int x , int y, int x1, int y1, BufferedImage image){
         final double lowgr = (y-0.0)/(x-0.0);
         final double midgr = (y1-y+0.0)/(x1-x+0.0);
@@ -462,6 +405,14 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
         return image;
         
         
+    }
+     
+    public BufferedImage grayOut(BufferedImage img) {
+        ColorConvertOp colorConvert = new ColorConvertOp(ColorSpace
+                .getInstance(ColorSpace.CS_GRAY), null);
+        colorConvert.filter(img, img);
+ 
+        return img;
     }
    
    
