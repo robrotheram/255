@@ -55,7 +55,7 @@ public class smalluiGui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     public smalluiGui() {
-      
+      System.out.println((5/2));
             
        
         initComponents();
@@ -1056,35 +1056,35 @@ public class smalluiGui extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
        
-        jTextField12.setText("-1");
+        jTextField12.setText("-4");
         jTextField16.setText("-1");
-        jTextField21.setText("-1");
+        jTextField21.setText("0");
         jTextField26.setText("-1");
-        jTextField31.setText("-1");
+        jTextField31.setText("-4");
         
         jTextField11.setText("-1");
-        jTextField20.setText("-2");
-        jTextField25.setText("-2");
-        jTextField30.setText("-2");
+        jTextField20.setText("2");
+        jTextField25.setText("3");
+        jTextField30.setText("2");
         jTextField35.setText("-1");
 
-        jTextField13.setText("-1");
-        jTextField19.setText("-2");
-        jTextField24.setText("32");
-        jTextField29.setText("-2");
-        jTextField34.setText("-1");
+        jTextField13.setText("0");
+        jTextField19.setText("3");
+        jTextField24.setText("4");
+        jTextField29.setText("3");
+        jTextField34.setText("0");
         
         jTextField14.setText("-1");
-        jTextField18.setText("-2");
-        jTextField23.setText("-2");
-        jTextField28.setText("-2");
+        jTextField18.setText("2");
+        jTextField23.setText("3");
+        jTextField28.setText("2");
         jTextField33.setText("-1");
         
-        jTextField15.setText("-1");
+        jTextField15.setText("-4");
         jTextField17.setText("-1");
-        jTextField22.setText("-1");
+        jTextField22.setText("0");
         jTextField27.setText("-1");
-        jTextField32.setText("-1");
+        jTextField32.setText("-4");
         
     }//GEN-LAST:event_jButton9ActionPerformed
 

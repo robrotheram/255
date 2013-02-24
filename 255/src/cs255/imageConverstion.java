@@ -327,7 +327,7 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
           int f =0;
         
           byte[] data = GetImageData(image);
-          int[] map = new int[data.length];
+          int[][] map = new int[data.length][3];
           
           int w=image.getWidth(), h=image.getHeight(), i, j, c;
           for (j=0; j<h; j++) {
@@ -339,6 +339,8 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
                                
                                int newHPos = j-(matrix.length/2);
                                int newWPos = i-(matrix[0].length/2);
+                               
+                               
                                 for (int k = 0; k<matrix.length; k++) {
                                     newWPos = i-(matrix[0].length/2);
                                     for (int l = 0; l<matrix.length; l++) {
@@ -349,10 +351,8 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
                                     }
                                     newHPos++ ;       
                                 }
-                                if((((c+3.0*newWPos+3.0*newHPos*w)/data.length)*100)>98){
-                                 //System.out.println("error! whp = "+newHPos+" wwp = "+newWPos+" percent = "+((((c+3.0*newWPos+3.0*newHPos*w)/data.length)*100)));   
-                                }
-                                map[c+3*i+3*j*w]=sum;                                
+                              
+                                map[c+3*i+3*j*w][c]=sum;                                
                                 
                                 
                             }else  {
@@ -376,7 +376,7 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
         for (j=0; j<h; j++) {
                       for (i=0; i<w; i++) {
                           for (c=0; c<3; c++) {
-                                    int test = map[c+3*i+3*j*w];
+                                    int test = map[c+3*i+3*j*w][c];
                                     if(test < rgbMin){
                                         rgbMin = test;
                                     }else if(test > rgbMax){
@@ -391,8 +391,8 @@ public int getColor(int r , int g, int b,int p, int c, int[] map ){
         for (j=0; j<h; j++) {
                               for (i=0; i<w; i++) {
                                   for (c=0; c<3; c++) {
-                                       int am = map[c+3*i+3*j*w];
-                                       data[c+3*i+3*j*w]=(byte) ( ((am-rgbMin)*225)/(rgbMax-rgbMin)  );               
+                                       int am = map[c+3*i+3*j*w][c];
+                                       data[c+3*i+3*j*w]=(byte) ( ((am-rgbMin)*255)/(rgbMax-rgbMin)  );               
                             }
                        }     
                 }
