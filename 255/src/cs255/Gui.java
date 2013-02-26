@@ -877,7 +877,8 @@ public class Gui extends javax.swing.JFrame {
         
         
         System.out.println("r1 = "+x+" s1 = "+y+" r2 = "+x1+" s2 = "+y1);
-        setImage((ic.contrastStretching(x,y,x1,y1, image)));
+        setImage((ic.contrastStretching(x,y,x1,y1, image))); 
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
