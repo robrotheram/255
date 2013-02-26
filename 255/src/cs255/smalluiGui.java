@@ -867,16 +867,16 @@ public class smalluiGui extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         
-        int x = drawPanel.getr1();
-        int y = drawPanel.gets2();
+        int x = Integer.parseInt(jTextField7.getText());
+        int y = Integer.parseInt(jTextField8.getText());
                 
-        int x1 =drawPanel.gets1();
+        int x1 =Integer.parseInt(jTextField6.getText());
                 
-        int y1 = drawPanel.getr2();
+        int y1 = Integer.parseInt(jTextField9.getText());
         
         
         System.out.println("r1 = "+x+" s1 = "+y+" r2 = "+x1+" s2 = "+y1);
-        setImage((ic.contrastStretching(x, y, x1, y1, image)));
+        setImage((ic.contrastStretching(x,y,x1,y1, image)));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
